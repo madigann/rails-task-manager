@@ -1,17 +1,25 @@
-<div class="container py-3">
-  <h1>My Tasks</h1>
-  <ul class="tasks">
-    <% @tasks.each do |task| %>
-      <li><%= link_to task.title, task_path(task) %></li>
-      <p><%= task.details %></p>
+<h1>My Tasks</h1>
+
+<ul id="tasks">
+  <% @tasks.each do |task| %>
+    <li>
+      <%= link_to task.title, task_path(task) %>.
       <% if(task.completed) %>
-        <p><i class="fa-solid fa-square-check"></i></p>
+        <i class="fa fa-check-square-o"></i>
       <% else %>
-        <p><i class="fa-solid fa-square"></i></p>
+        <i class="fa fa-check-o"></i>
       <% end %>
 
-    <% end %>
-  </ul>
+      <%= link_to task_path(task.id), method: :delete, data: { confirm: "Delete #{task.title}?" } do %>
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+      <% end %>
+      <p><%= task.details %></p>
+    </li>
+  <% end %>
+</ul>
 
-  <%= link_to "Add a New Task", new_task_path %>
-</div>
+<hr>
+
+<%= link_to new_task_path do %>
+  <i class="fa fa-plus"></i> Add a new task
+<% end %>

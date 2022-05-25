@@ -1,7 +1,5 @@
 class TasksController < ApplicationController
-
-  # line below will call #set_restaurant method before specified actions
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @tasks = Task.all
@@ -17,11 +15,10 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.save
-    redirect_to task_path(@task)
+    redirect_to tasks_path
   end
 
   def edit
-    @task.save
   end
 
   def update
@@ -31,7 +28,6 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-
     redirect_to tasks_path
   end
 
